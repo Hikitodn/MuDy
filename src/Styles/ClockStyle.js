@@ -28,7 +28,7 @@ export default StyleSheet.create({
         marginTop: 10,
     },
     innerUlti:{
-        borderWidth: 2,
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',

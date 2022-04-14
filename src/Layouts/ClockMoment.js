@@ -4,15 +4,23 @@ import moment from 'moment'
 import ClockStyle from '../Styles/ClockStyle'
 import { MaterialIcons, Feather, Ionicons } from '@expo/vector-icons';
 
-const ClockMoment = ({weatherData}) => {
+const ClockMoment = ({weatherData, onPressed}) => {
+    
+    //get data for Visible todoList
+    const [isHidden] = useState(false)
+    const handleChange = () => {
+      onPressed(!isHidden);
+    }
+    
+    //moment data for clock
     const [currentDateMoment, setCurrentDateMonent] = useState('')
-
     useEffect(() => {
       var dateMoment = moment().format('hh:mm');
       setCurrentDateMonent(dateMoment);
 
     }, []);
 
+    //API icon
     if(weatherData){
     const img = {uri: 'http://openweathermap.org/img/wn/'+ weatherData[0].icon +'@4x.png'}
     return(
@@ -25,11 +33,11 @@ const ClockMoment = ({weatherData}) => {
             <View style={ClockStyle.ultiContainer}>
               <View style={{marginRight: 10}}>
                 <TouchableOpacity style={ClockStyle.innerUlti}>
-                  <Ionicons name="alarm" size={30} color="black" />
+                  <Ionicons name="alarm-outline" size={30} color="#80ACFF" />
                 </TouchableOpacity>
               </View>
               <View>
-                <TouchableOpacity style={ClockStyle.innerUlti}>
+                <TouchableOpacity onPress={() => handleChange()} style={ClockStyle.innerUlti}>
                   <Feather name="list" size={30} color="#80ACFF" />
                 </TouchableOpacity>
               </View>
@@ -47,7 +55,7 @@ const ClockMoment = ({weatherData}) => {
         <View style={ClockStyle.ultiContainer}>
           <View style={{marginRight: 10}}>
             <TouchableOpacity style={ClockStyle.innerUlti}>
-              <Ionicons name="alarm" size={30} color="black" />
+              <Ionicons name="alarm-outline" size={30} color="#80ACFF" />
             </TouchableOpacity>
           </View>
           <View>

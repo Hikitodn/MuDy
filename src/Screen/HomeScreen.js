@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { ImageBackground, SafeAreaView, StyleSheet, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import * as Location from 'expo-location';
@@ -16,6 +16,14 @@ const HomeScreen = () => {
 
   //Call API to get weather icon
   const [data, setData] = useState({});
+
+  //-----------------// Hidden/Visible TodoList
+  const [isHidden, setStatus] = useState(false)
+
+  const onPressed = () => {
+    setStatus(!isHidden)
+  }
+  //-----------------//
 
   useEffect(() => {
     (async () => {
@@ -66,14 +74,15 @@ const HomeScreen = () => {
           
         {/* Clock, Todo List Visible/Hidden */}
 
-        <ClockMoment weatherData={data.weather} />
-        
-        
+        <ClockMoment weatherData={data.weather} onPressed={onPressed} />
+    
         <View style={styles.midContainer}>
 
           {/* List Add Button, List View  */}
 
-          <TodoList />
+          {isHidden ? (
+            <TodoList />
+          ) : null}
             
           {/* ASMR */}
             
