@@ -5,13 +5,7 @@ import ClockStyle from '../Styles/ClockStyle'
 import { MaterialIcons, Feather, Ionicons } from '@expo/vector-icons';
 
 const ClockMoment = ({weatherData, onPressed}) => {
-    
-    //get data for Visible todoList
-    const [isHidden] = useState(false)
-    const handleChange = () => {
-      onPressed(!isHidden);
-    }
-    
+        
     //moment data for clock
     const [currentDateMoment, setCurrentDateMonent] = useState('')
     useEffect(() => {
@@ -37,7 +31,7 @@ const ClockMoment = ({weatherData, onPressed}) => {
                 </TouchableOpacity>
               </View>
               <View>
-                <TouchableOpacity onPress={() => handleChange()} style={ClockStyle.innerUlti}>
+                <TouchableOpacity onPress={() => onPressed()} style={ClockStyle.innerUlti}>
                   <Feather name="list" size={30} color="#80ACFF" />
                 </TouchableOpacity>
               </View>
@@ -59,7 +53,7 @@ const ClockMoment = ({weatherData, onPressed}) => {
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity style={ClockStyle.innerUlti}>
+            <TouchableOpacity onPress={() => onPressed()} style={ClockStyle.innerUlti}>
               <Feather name="list" size={30} color="#80ACFF" />
             </TouchableOpacity>
           </View>

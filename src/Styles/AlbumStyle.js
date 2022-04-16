@@ -32,11 +32,12 @@ export default StyleSheet.create({
     },
     innerAdd: {
         alignSelf: 'flex-end',
-        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        flex: 1,
         margin: 10,
-        padding: 5,
+        paddingRight: 10,
         position: 'absolute',
-        top: 593, bottom: 0, left: 280, right: 0,
+        bottom: 0,
     },
     add:{
         flex: 1,
