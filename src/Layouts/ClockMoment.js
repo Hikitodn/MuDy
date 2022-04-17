@@ -9,9 +9,10 @@ const ClockMoment = ({weatherData, onPressed}) => {
     //moment data for clock
     const [currentDateMoment, setCurrentDateMonent] = useState('')
     useEffect(() => {
-      var dateMoment = moment().format('hh:mm');
-      setCurrentDateMonent(dateMoment);
-
+      setInterval(() => {
+        var dateMoment = moment().format('hh:mm');
+        setCurrentDateMonent(dateMoment);
+      }, 1000);
     }, []);
 
     //API icon

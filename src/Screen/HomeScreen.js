@@ -1,4 +1,4 @@
-import { ImageBackground, SafeAreaView, StyleSheet, View } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import * as Location from 'expo-location';

@@ -7,6 +7,7 @@ export default StyleSheet.create({
     },
     listContainer: {
         margin: 5,
+        flex: 1,
     },
     addInput:{
         backgroundColor: "#fff",
@@ -35,17 +36,11 @@ export default StyleSheet.create({
         padding: 2.5,
         borderRadius: 5,
     },
-    Ulti1: {
+    Ulti: {
         marginHorizontal: 7.5,
         backgroundColor: '#fff',
         borderRadius: 50,
         padding: 2,
         borderWidth: 1,
     },
-    Ulti2: {
-        backgroundColor: '#fff',
-        borderRadius: 50,
-        padding: 2,
-        borderWidth: 1,
-    }
 })

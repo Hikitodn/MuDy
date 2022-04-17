@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { FontAwesome5, MaterialIcons  } from '@expo/vector-icons';
 import { StatusBar } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Provider } from 'react-redux'
+import { Store } from './src/redux/store'
 
 import HomeScreen from './src/Screen/HomeScreen';
 import AlbumScreen from './src/Screen/AlbumScreen';
@@ -39,26 +41,28 @@ const HomeTab = () => {
 
 const App = () => {
   return (
-    <NavigationContainer> 
-      <StatusBar hidden/>
-      <RootStack.Navigator
-        initialRouteName="HomeTab"
-        screenOptions={{
-          headerShown: false,  
-        }}>
+    // <Provider store={Store}>
+      <NavigationContainer> 
+        <StatusBar hidden/>
+        <RootStack.Navigator
+          initialRouteName="HomeTab"
+          screenOptions={{
+            headerShown: false,  
+          }}>
 
-      <RootStack.Screen 
-        name = 'HomeTab'
-        component = {HomeTab}
-      />
+        <RootStack.Screen 
+          name = 'HomeTab'
+          component = {HomeTab}
+        />
 
-      <RootStack.Screen 
-        name = 'New Album' 
-        component = {AddNewAlbumScreen}  
-      />
-        
-      </RootStack.Navigator>
-    </NavigationContainer>
+        <RootStack.Screen 
+          name = 'New Album' 
+          component = {AddNewAlbumScreen}  
+        />
+          
+        </RootStack.Navigator>
+      </NavigationContainer>
+  //  </Provider>
   );
 }
 
