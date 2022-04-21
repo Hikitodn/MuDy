@@ -2,7 +2,7 @@ import { Text, View, Image, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import ClockStyle from '../Styles/ClockStyle'
-import { MaterialIcons, Feather, Ionicons } from '@expo/vector-icons';
+import { Feather, Ionicons } from '@expo/vector-icons';
 
 const ClockMoment = ({weatherData, onPressed}) => {
         
@@ -45,7 +45,6 @@ const ClockMoment = ({weatherData, onPressed}) => {
       <View style={ClockStyle.clockContainer}>
         <View style={ClockStyle.innerClockWeather}>
             <Text style={ClockStyle.clockText}>{currentDateMoment}</Text>
-            <MaterialIcons name="error" size={24} color="black" />
         </View>
         <View style={ClockStyle.ultiContainer}>
           <View style={{marginRight: 10}}>

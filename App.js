@@ -4,12 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { FontAwesome5, MaterialIcons  } from '@expo/vector-icons';
 import { StatusBar } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Provider } from 'react-redux'
-import { Store } from './src/redux/store'
 
 import HomeScreen from './src/Screen/HomeScreen';
 import AlbumScreen from './src/Screen/AlbumScreen';
 import AddNewAlbumScreen from './src/Screen/AddNewAlbumScreen';
+import AudioProvider from './src/context/AudioProvider';
+import SongsListScreen from './src/Screen/SongsListScreen';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -41,7 +41,7 @@ const HomeTab = () => {
 
 const App = () => {
   return (
-    // <Provider store={Store}>
+    <AudioProvider>
       <NavigationContainer> 
         <StatusBar hidden/>
         <RootStack.Navigator
@@ -60,9 +60,13 @@ const App = () => {
           component = {AddNewAlbumScreen}  
         />
           
+        <RootStack.Screen
+          name = 'Song List'
+          component= {SongsListScreen}
+        />
         </RootStack.Navigator>
       </NavigationContainer>
-  //  </Provider>
+    </AudioProvider>
   );
 }
 

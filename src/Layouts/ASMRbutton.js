@@ -1,19 +1,29 @@
-import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import ASMRstyle from '../Styles/ASMRstyle'
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { Audio } from 'expo-av';
 
 const ASMRbutton = () => {
+
+  const [sound, setSound] = React.useState();
+
+  async function playSound() {
+    console.log('Loading Sound');
+    const { sound } = await Audio.Sound.createAsync(
+       require('../../assets/Songs/failsound.wav')
+    );
+    setSound(sound);
+
+    console.log('Playing Sound');
+    await sound.playAsync(); 
+  }
+
   
   const [isPressed1, setPressed1] = useState(false)
   const [isPressed2, setPressed2] = useState(false)
   const [isPressed3, setPressed3] = useState(false)
 
-  const toggle1 = () => {
-    setPressed1(true)
-    setPressed2(false)
-    setPressed3(false)
-  }
   const toggle2 = () => {
     setPressed1(false)
     setPressed2(true)
@@ -33,7 +43,7 @@ const ASMRbutton = () => {
       
       </View> */}
       <View>
-        <TouchableOpacity onPress={toggle1} style={{padding: 10, borderRadius:5, margin:5, backgroundColor: isPressed1 ? "green" : "red"}}>
+        <TouchableOpacity onPress={playSound} style={{padding: 10, borderRadius:5, margin:5, backgroundColor: isPressed1 ? "green" : "red"}}>
             <View>
               <FontAwesome5 name="wind" size={30} color="black" />
             </View>
