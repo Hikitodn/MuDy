@@ -33,7 +33,7 @@ const AddNewAlbum = () => {
                 <View style={NewAlbumStyle.innerSongs}>
                     <Text>aaaa</Text>
                     <View style={NewAlbumStyle.innerAdd}>
-                        <TouchableOpacity style={NewAlbumStyle.add}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Song List')} style={NewAlbumStyle.add}>
                             <FontAwesome5 name="plus" size={30} color="black" />
                         </TouchableOpacity>
                     </View>

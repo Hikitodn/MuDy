@@ -1,59 +1,58 @@
 import { View, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import ASMRstyle from '../Styles/ASMRstyle'
+import React, { useState, useEffect } from 'react'
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
+import VerticalSlider from 'rn-vertical-slider';
+
+import ASMRstyle from '../Styles/ASMRstyle'
 
 const ASMRbutton = () => {
-
-  const [sound, setSound] = React.useState();
-
-  async function playSound() {
-    console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync(
-       require('../../assets/Songs/failsound.wav')
-    );
-    setSound(sound);
-
-    console.log('Playing Sound');
-    await sound.playAsync(); 
-  }
-
+  const [isPressed1, setStatus1] = useState(false);
+  const [isPressed2, setStatus2] = useState(false);
+  const [isPressed3, setStatus3] = useState(false);
   
-  const [isPressed1, setPressed1] = useState(false)
-  const [isPressed2, setPressed2] = useState(false)
-  const [isPressed3, setPressed3] = useState(false)
+  const [volNumber, setVolNumber] = useState();
+  const [sound, setSound] = useState();
 
-  const toggle2 = () => {
-    setPressed1(false)
-    setPressed2(true)
-    setPressed3(false)
-  }
-
-  const toggle3 = () => {
-    setPressed1(false)
-    setPressed2(false)
-    setPressed3(true)
-  }
-
+  useEffect(() => {
+    return sound
+      ? () => {
+          console.log('Unloading Sound');
+          sound.unloadAsync(); }
+      : undefined;
+  }, [sound]);
 
   return (
     <View style={ASMRstyle.containerButtonASMR}>
-      {/* <View>
-      
-      </View> */}
       <View>
-        <TouchableOpacity onPress={playSound} style={{padding: 10, borderRadius:5, margin:5, backgroundColor: isPressed1 ? "green" : "red"}}>
+        <VerticalSlider
+          value={volNumber}
+          disabled={false}
+          min={0}
+          max={1}
+          step={0.01}
+          width={25}
+          height={175}
+          onChange={(value) => {
+            setVolNumber(value);
+          }}
+          onComplete={(value) => {
+            setVolNumber(value);
+          }}
+        />
+      </View>
+      <View>
+        <TouchableOpacity style={{padding: 10, borderRadius:5, margin:5, backgroundColor: isPressed1 ? "green" : "red"}}>
             <View>
               <FontAwesome5 name="wind" size={30} color="black" />
             </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={toggle2} style={{padding: 10, borderRadius:5, margin:5, backgroundColor: isPressed2 ? "green" : "red"}}>
+        <TouchableOpacity style={{padding: 10, borderRadius:5, margin:5, backgroundColor: isPressed2 ? "green" : "red"}}>
           <View>
             <Ionicons name="rainy" size={30} color="black" />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={toggle3} style={{padding: 10, borderRadius:5, margin:5, backgroundColor: isPressed3 ? "green" : "red"}}>
+        <TouchableOpacity style={{padding: 10, borderRadius:5, margin:5, backgroundColor: isPressed3 ? "green" : "red"}}>
           <View>
             <FontAwesome5 name="snowflake" size={30} color="black" />
           </View>

@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
     containerButtonASMR:{
-        justifyContent: 'center',
-        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
         flex: 1,
-        flexDirection: 'column',
+        flexDirection: 'row',
         margin: 5,
     },
     buttonASMR:{

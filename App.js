@@ -61,6 +61,7 @@ const App = () => {
         />
           
         <RootStack.Screen
+          options={{headerShown:true}}
           name = 'Song List'
           component= {SongsListScreen}
         />

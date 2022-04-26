@@ -14,9 +14,6 @@ const img = require('../../assets/Images/background.png');
 
 const HomeScreen = () => {
 
-  //Call API to get weather icon
-  const [data, setData] = useState({});
-
   //-----------------// Hidden/Visible TodoList
   const [isHidden, setStatus] = useState(false)
 
@@ -25,6 +22,9 @@ const HomeScreen = () => {
   }
   //-----------------//
 
+  //Call API to get weather icon
+  const [data, setData] = useState({});
+  
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -46,7 +46,6 @@ const HomeScreen = () => {
       setData(data)
       })
     }
-    
   }
 
   //useFonts 
