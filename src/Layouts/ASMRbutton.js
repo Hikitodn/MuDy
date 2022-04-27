@@ -26,6 +26,7 @@ const ASMRbutton = () => {
     <View style={ASMRstyle.containerButtonASMR}>
       <View>
         <VerticalSlider
+          borderRadius={50}
           value={volNumber}
           disabled={false}
           min={0}

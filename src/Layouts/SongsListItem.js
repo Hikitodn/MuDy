@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Entypo } from '@expo/vector-icons';
+import { Octicons, Entypo } from '@expo/vector-icons';
+import color from '../Misc/color'
 
 const getThumbnailText = filename => filename[0];
 
@@ -38,27 +39,31 @@ const renderPlayPauseIcon = isPlaying => {
 const SongsListItem = ({
   title,
   duration,
+  onAudioPress,
+  isPlaying,
+  activeListItem,
 }) => {
   return (
     <>
-        <View style={styles.container}>
-          <TouchableWithoutFeedback>
+      <View style={styles.container}>
+          <TouchableWithoutFeedback onPress={onAudioPress}>
             <View style={styles.leftContainer}>
-              {/* <View
+              <View
                 style={[
                   styles.thumbnail,
                   {
                     backgroundColor: activeListItem
-                      ? '#5252ad'
-                      : '#b6b8b9',
+                      ? color.ACTIVE_BG
+                      : color.FONT_LIGHT,
                   },
                 ]}
-              > */}
+              >
                 <Text style={styles.thumbnailText}>
-                  
-                    {getThumbnailText(title)}
+                  {activeListItem
+                    ? renderPlayPauseIcon(isPlaying)
+                    : getThumbnailText(title)}
                 </Text>
-               {/* </View> */}
+              </View>
               <View style={styles.titleContainer}>
                 <Text numberOfLines={1} style={styles.title}>
                   {title}
@@ -68,10 +73,12 @@ const SongsListItem = ({
             </View>
           </TouchableWithoutFeedback>
           <View style={styles.rightContainer}>
-            <Entypo name="dots-three-vertical" size={24} color="#636363" />
+            <TouchableOpacity>
+              <Octicons name="diff-added" size={24} color="black" />
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.separator} />
+      <View style={styles.separator} />
     </>
   )
 }

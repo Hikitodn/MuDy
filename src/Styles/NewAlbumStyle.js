@@ -6,7 +6,7 @@ export default StyleSheet.create({
         flex: 1,
     },
     AlbumView: {
-        height: 155,
+        height: 170,
         margin: 5,
         alignItems: 'stretch',
         justifyContent: 'center',
@@ -18,7 +18,8 @@ export default StyleSheet.create({
         alignItems: 'stretch',
     },
     innerImage: {
-        flex: 1,
+        width: 150,
+        height: 150,
         margin: 10,
         backgroundColor: '#2ff',
         alignItems:'center',

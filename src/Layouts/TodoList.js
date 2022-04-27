@@ -1,6 +1,6 @@
 import { View, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import React from 'react'
-import { Entypo, MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import ListStyle from '../Styles/ListStyle';
 import { useState } from 'react';
 
@@ -31,9 +31,9 @@ const TodoList = () => {
       <View style={ListStyle.listContainer}>
 
           <View>
-              <TouchableOpacity onPress={addHandler} style={ListStyle.addInput}>
-                  <Entypo name="add-to-list" size={24} color="black" />
-              </TouchableOpacity>
+            <TouchableOpacity onPress={addHandler} style={ListStyle.addInput}>
+              <MaterialIcons name="playlist-add" size={24} color="black" />
+            </TouchableOpacity>
           </View>
 
           <ScrollView>
