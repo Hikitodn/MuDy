@@ -1,22 +1,16 @@
-import { Text, View, ScrollView, Dimensions } from 'react-native'
+import { Dimensions } from 'react-native'
 import React, { Component } from 'react'
 import { AudioContext } from '../context/AudioProvider'
 import {RecyclerListView, LayoutProvider} from 'recyclerlistview';
 import SongsListItem from '../Layouts/SongsListItem';
 import Screen from '../Misc/Screen';
-import { Audio } from 'expo-av';
-import { play, pause, resume, playNext } from '../Misc/audioController';
+import { selectAudio } from '../Misc/audioController';
 
 export class SongsListScreen extends Component {
   static contextType = AudioContext
 
   constructor(props) {
     super(props);
-    this.state = {
-      playbackObj: null,
-      soundObj: null,
-      currentAudio: {},
-    }
     this.currentItem = {};
   }
 
@@ -35,55 +29,12 @@ export class SongsListScreen extends Component {
   })
 
   handleAudioPress = async audio => {
-    const {playbackObj, soundObj, currentAudio, updateState, audioFiles} = this.context;
-    //play audio for the first time
-    if(soundObj == null) {
-      const playbackObj = new Audio.Sound()
-      const status = await play(playbackObj, audio.uri)
-      const index = audioFiles.indexOf(audio)
-      return updateState(this.context, {
-        currentAudio: audio, 
-        playbackObj: playbackObj,
-        soundObj: status,
-        isPlaying: true,
-        currentAudioIndex: index,
-      });
-    }
-
-    //pause
-    if(soundObj.isPlaying && soundObj.isLoaded && currentAudio.id === audio.id){
-      const status = await pause(playbackObj)
-      return updateState(this.context, {
-        soundObj: status,
-        isPlaying: false,
-      });
-    }
-
-    //resume
-    if(!soundObj.isPlaying && soundObj.isLoaded && currentAudio.id === audio.id){
-      const status = await resume(playbackObj)
-      return updateState(this.context, {
-        soundObj: status,
-        isPlaying: true,
-      });
-    }
-    
-    //select another audio
-    if(soundObj.isLoaded && currentAudio.id !== audio.id){
-      const status = await playNext(playbackObj, audio.uri);
-      const index = audioFiles.indexOf(audio)
-      return updateState(this.context, {
-        currentAudio: audio, 
-        soundObj: status,
-        isPlaying: true,
-        currentAudioIndex: index,
-      });
-    }
+    await selectAudio(audio, this.context)
   }
 
-  // componentDidMount() {
-  //   this.context.loadPreviousAudio();
-  // }
+  componentDidMount() {
+    this.context.loadPreviousAudio();
+  }
 
   rowRenderer = (type, item, index, extendedState) => {
     return (
@@ -93,6 +44,11 @@ export class SongsListScreen extends Component {
         activeListItem={this.context.currentAudioIndex === index}
         duration={item.duration}
         onAudioPress={() => this.handleAudioPress(item)}
+        onAddPlayList={() => 
+          this.context.updateState(this.context, {
+            addToPlayList: this.currentItem,
+          })
+        }
       />
     );
   };

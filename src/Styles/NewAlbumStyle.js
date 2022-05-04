@@ -21,9 +21,11 @@ export default StyleSheet.create({
         width: 150,
         height: 150,
         margin: 10,
-        backgroundColor: '#2ff',
         alignItems:'center',
         justifyContent: 'center',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderStyle: 'dashed',
     },
     innerForm: {
         flex: 1.5,
@@ -48,12 +50,10 @@ export default StyleSheet.create({
         flex: 12,
         margin: 5,
         borderWidth: 1,
-        backgroundColor: '#44d'
     },
     innerSongs: {
         margin: 10,
         flex: 1,
-        backgroundColor: '#ff2'
     },
     ButtonView: {
         flex: 1,
@@ -72,7 +72,6 @@ export default StyleSheet.create({
         alignSelf: 'flex-end',
         justifyContent: 'flex-end',
         flex: 1,
-        backgroundColor: '#22b',
         position: 'absolute',
         bottom: 0,
     },

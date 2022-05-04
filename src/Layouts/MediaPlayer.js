@@ -2,73 +2,65 @@ import { Dimensions, Text, View } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react';
 import MediaStyle from '../Styles/MediaStyle'
 import PlayerButton from '../Misc/PlayerButton';
-// import { AudioContext } from '../context/AudioProvider';
-// import { convertTime, storeAudioForNextOpening } from '../Misc/Storage';
-// import Slider from '@react-native-community/slider';
-// import { 
-//   changeAudio,
-//   moveAudio,
-//   pause,
-//   play,
-//   playNext,
-//   resume,
-//   selectAudio,
-// } from '../Misc/audioController';
+import { AudioContext } from '../context/AudioProvider';
+import { convertTime, storeAudioForNextOpening } from '../Misc/Storage';
+import Slider from '@react-native-community/slider';
+import { 
+  changeAudio,
+  pause,
+  selectAudio,
+} from '../Misc/audioController';
 
 const { width } = Dimensions.get('window')
 
 const MediaPlayer = () => {
 
-  // const [currentPosition, setCurrentPosition] = useState(0);
-  // const context = useContext(AudioContext);
-  // const { playbackPosition, playbackDuration, currentAudio } = context;
+  const [currentPosition, setCurrentPosition] = useState(0);
+  const context = useContext(AudioContext);
+  const { playbackPosition, playbackDuration, currentAudio } = context;
 
-  // const calculateSeebBar = () => {
-  //   if (playbackPosition !== null && playbackDuration !== null) {
-  //     return playbackPosition / playbackDuration;
-  //   }
+  const calculateSeebBar = () => {
+    if (playbackPosition !== null && playbackDuration !== null) {
+      return playbackPosition / playbackDuration;
+    }
 
-  //   if (currentAudio.lastPosition) {
-  //     return currentAudio.lastPosition / (currentAudio.duration * 1000);
-  //   }
+    if (currentAudio.lastPosition) {
+      return currentAudio.lastPosition / (currentAudio.duration * 1000);
+    }
 
-  //   return 0;
-  // };
+    return 0;
+  };
 
-  // useEffect(() => {
-  //   context.loadPreviousAudio();
-  // }, []);
+  const handlePlayPause = async () => {
+    await selectAudio(context.currentAudio, context);
+  };
 
-  // const handlePlayPause = async () => {
-  //   await selectAudio(context.currentAudio, context);
-  // };
+  const handleNext = async () => {
+    await changeAudio(context, 'next');
+  };
 
-  // const handleNext = async () => {
-  //   await changeAudio(context, 'next');
-  // };
+  const handlePrevious = async () => {
+    await changeAudio(context, 'previous');
+  };
 
-  // const handlePrevious = async () => {
-  //   await changeAudio(context, 'previous');
-  // };
+  const renderCurrentTime = () => {
+    if (!context.soundObj && currentAudio.lastPosition) {
+      return convertTime(currentAudio.lastPosition / 1000);
+    }
+    return convertTime(context.playbackPosition / 1000);
+  };
 
-  // const renderCurrentTime = () => {
-  //   if (!context.soundObj && currentAudio.lastPosition) {
-  //     return convertTime(currentAudio.lastPosition / 1000);
-  //   }
-  //   return convertTime(context.playbackPosition / 1000);
-  // };
-
-  // if (!context.currentAudio) return null;
+  if (!context.currentAudio) return null;
 
   return (
     <View style={MediaStyle.containerMedia}>
       <View>
-        {/* <Text style={MediaStyle.title}>{context.currentAudio.filename}</Text>
+        <Text style={MediaStyle.title}>{currentAudio.id == undefined ? "Pick your Album to listen" : context.currentAudio.filename}</Text>
         <View style={MediaStyle.timer}>
           <Text>
-            {currentPosition ? currentPosition : renderCurrentTime()}/
+            {currentAudio.id == undefined ? "00:00" : renderCurrentTime()}/
           </Text>
-          <Text>{convertTime(context.currentAudio.duration)}</Text>
+          <Text>{currentAudio.id == undefined ? "00:00" : convertTime(context.currentAudio.duration)}</Text>
         </View>        
         <Slider 
           style={{width: width, height: 20,}}
@@ -95,12 +87,12 @@ const MediaPlayer = () => {
             await moveAudio(context, value);
             setCurrentPosition(0);
           }}
-        /> */}
+        />
       </View>
       <View style={MediaStyle.innerMedia} >
-        <PlayerButton iconType='PREV'/>
-        <PlayerButton iconType={'PLAY'} />
-        <PlayerButton iconType='NEXT' />
+        <PlayerButton onPress={handlePrevious} iconType='PREV'/>
+        <PlayerButton onPress={handlePlayPause} iconType={ context.isPlaying ? 'PLAY' : 'PAUSE' } />
+        <PlayerButton onPress={handleNext} iconType='NEXT' />
       </View>
     </View>
   )
