@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { FontAwesome5, MaterialIcons  } from '@expo/vector-icons';
+import { FontAwesome5, MaterialIcons, Entypo } from '@expo/vector-icons';
 import { StatusBar } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -20,7 +20,15 @@ const HomeTab = () => {
           screenOptions={{
             headerShown: false,  
           }}
+          initialRouteName="Home"
         >
+          <Tab.Screen name = 'Song List' component= {SongsListScreen} 
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <Entypo name="folder-music" size={size} color={color} />
+              ),
+            }}
+          />
           <Tab.Screen name="Home" component={HomeScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
@@ -60,11 +68,6 @@ const App = () => {
           component = {AddNewAlbumScreen}  
         />
           
-        <RootStack.Screen
-          options={{headerShown:true}}
-          name = 'Song List'
-          component= {SongsListScreen}
-        />
         </RootStack.Navigator>
       </NavigationContainer>
     </AudioProvider>

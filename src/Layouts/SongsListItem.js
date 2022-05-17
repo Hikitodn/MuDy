@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, Touchable
 import React from 'react'
 import { Octicons, Entypo } from '@expo/vector-icons';
 import color from '../Misc/color'
+import { SearchBar } from 'react-native-screens';
 
 const getThumbnailText = filename => filename[0];
 
@@ -47,6 +48,7 @@ const SongsListItem = ({
   return (
     <>
       <View style={styles.container}>
+        <SearchBar/>
           <TouchableWithoutFeedback onPress={onAudioPress}>
             <View style={styles.leftContainer}>
               <View
@@ -74,8 +76,8 @@ const SongsListItem = ({
             </View>
           </TouchableWithoutFeedback>
           <View style={styles.rightContainer}>
-            <TouchableOpacity>
-              <Octicons onPress={onAddPlayList} name="diff-added" size={24} color="black" />
+            <TouchableOpacity onPress={onAddPlayList}>
+              <Octicons name="diff-added" size={30} color="black" />
             </TouchableOpacity>
           </View>
         </View>

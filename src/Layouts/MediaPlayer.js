@@ -5,7 +5,8 @@ import PlayerButton from '../Misc/PlayerButton';
 import { AudioContext } from '../context/AudioProvider';
 import { convertTime, storeAudioForNextOpening } from '../Misc/Storage';
 import Slider from '@react-native-community/slider';
-import { 
+import {
+  moveAudio,
   changeAudio,
   pause,
   selectAudio,

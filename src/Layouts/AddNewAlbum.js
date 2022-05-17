@@ -1,4 +1,4 @@
-import { Text, View, Button, Image, TextInput, FlatList, TouchableOpacity } from 'react-native'
+import { Text, View, Button, Image, TextInput, TouchableOpacity, Alert } from 'react-native'
 import React, {useState, useContext} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -19,7 +19,7 @@ const AddNewAlbum = () => {
 
     const createNewAlbum = async () => {
         const result = await AsyncStorage.getItem('playlist');
-        if(result !== null){
+        if(result !== null || result === null){
             const audios = [];
             if(addToPlayList){
                 audios.push(addToPlayList)
@@ -31,10 +31,14 @@ const AddNewAlbum = () => {
                 des: desPlaylist,
                 audios: audios,
             }
-            const updatedList = [...playList, newList];
-            updateState(context, {addToPlayList: null, playList: updatedList});
-            await AsyncStorage.setItem('playlist', JSON.stringify(updatedList));
-            navigation.navigate('Albums', playList);
+            if (!playListName.trim()) {
+                Alert.alert("Please Enter Your Playlist Name!!!")
+            } else {
+                const updatedList = [...playList, newList];
+                updateState(context, {addToPlayList: null, playList: updatedList});
+                await AsyncStorage.setItem('playlist', JSON.stringify(updatedList));
+                navigation.navigate('Albums', playList);
+            }
         }
     }
 
@@ -47,7 +51,7 @@ const AddNewAlbum = () => {
         }
     
         let pickerResult = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.All,
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
                 allowsEditing: true,
                 aspect: [1, 1],
                 quality: 1,
@@ -56,7 +60,7 @@ const AddNewAlbum = () => {
         if (pickerResult.cancelled === true) {
           return;
         }
-    
+
         setSelectedImage({ localUri: pickerResult.uri });
     };
 
@@ -94,11 +98,6 @@ const AddNewAlbum = () => {
             <View style={NewAlbumStyle.SongsView}>
                 <View style={NewAlbumStyle.innerSongs}>
                     <Text></Text>
-                    <View style={NewAlbumStyle.innerAdd}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Song List')} style={NewAlbumStyle.add}>
-                            <FontAwesome5 name="plus" size={30} color="black" />
-                        </TouchableOpacity>
-                    </View>
                 </View>
             </View>
 
@@ -145,12 +144,7 @@ const AddNewAlbum = () => {
 
                 <View style={NewAlbumStyle.SongsView}>
                     <View style={NewAlbumStyle.innerSongs}>
-                        <Text></Text>
-                        <View style={NewAlbumStyle.innerAdd}>
-                            <TouchableOpacity onPress={() => navigation.navigate('Song List')} style={NewAlbumStyle.add}>
-                                <FontAwesome5 name="plus" size={30} color="black" />
-                            </TouchableOpacity>
-                        </View>
+                        
                     </View>
                 </View>
 

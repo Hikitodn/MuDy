@@ -36,6 +36,13 @@ export class SongsListScreen extends Component {
     this.context.loadPreviousAudio();
   }
 
+  navigateToPlaylist = item => {
+    this.context.updateState(this.context, {
+      addToPlayList: item,
+    });
+    this.props.navigation.navigate('Albums');
+  };
+
   rowRenderer = (type, item, index, extendedState) => {
     return (
       <SongsListItem
@@ -44,11 +51,7 @@ export class SongsListScreen extends Component {
         activeListItem={this.context.currentAudioIndex === index}
         duration={item.duration}
         onAudioPress={() => this.handleAudioPress(item)}
-        onAddPlayList={() => 
-          this.context.updateState(this.context, {
-            addToPlayList: this.currentItem,
-          })
-        }
+        onAddPlayList={() => this.navigateToPlaylist(item)}
       />
     );
   };
