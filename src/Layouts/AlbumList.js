@@ -17,22 +17,20 @@ const AlbumList = () => {
 
     const renderPlayList = async () => {
         const result = await AsyncStorage.getItem('playlist');
-        // if (result === null) {
-        //   const defaultPlayList = {
-        //     id: Date.now(),
-        //     title: 'My Favorite',
-        //     image: img,
-        //     des: 'Listen to all your favourite songs',
-        //     audios: [],
-        //   };
+        if (result === null) {
+          const defaultPlayList = {
+            id: Date.now(),
+            title: 'My Favorite',
+            audios: [],
+          };
     
-        //   const newPlayList = [...playList, defaultPlayList];
-        //   updateState(context, { playList: [...newPlayList] });
-        //   return await AsyncStorage.setItem(
-        //     'playlist',
-        //     JSON.stringify([...newPlayList])
-        //   );
-        // }
+          const newPlayList = [...playList, defaultPlayList];
+          updateState(context, { playList: [...newPlayList] });
+          return await AsyncStorage.setItem(
+            'playlist',
+            JSON.stringify([...newPlayList])
+          );
+        }
         updateState(context, { playList: JSON.parse(result) });
     };
     
@@ -84,9 +82,48 @@ const AlbumList = () => {
           updateState(context, { addToPlayList: null, playList: [...updatedList] });
           return AsyncStorage.setItem('playlist', JSON.stringify([...updatedList]));
         }
-
+        // if there is no audio selected then we want open the list.
         selectedPlayList = playList;
-        setShowPlayList(true);
+        // setShowPlayList(true);
+        navigation.navigate('PlayListDetail', playList);
+    }
+
+    const removePlaylist = async playList => {
+        let isPlaying = context.isPlaying;
+        let isPlayListRunning = context.isPlayListRunning;
+        let soundObj = context.soundObj;
+        let playbackPosition = context.playbackPosition;
+        let activePlayList = context.activePlayList;
+    
+        console.log(selectedPlayList)
+        if (context.isPlayListRunning && activePlayList.id === playList.id) {
+          // stop
+          await context.playbackObj.stopAsync();
+          await context.playbackObj.unloadAsync();
+          isPlaying = false;
+          isPlayListRunning = false;
+          soundObj = null;
+          playbackPosition = 0;
+          activePlayList = [];
+        }
+    
+        const result = await AsyncStorage.getItem('playlist');
+        if (result !== null) {
+          const oldPlayLists = JSON.parse(result);
+          const updatedPlayLists = oldPlayLists.filter(
+            item => item.id !== playList.id
+          );
+    
+          AsyncStorage.setItem('playlist', JSON.stringify(updatedPlayLists));
+          context.updateState(context, {
+            playList: updatedPlayLists,
+            isPlayListRunning,
+            activePlayList,
+            playbackPosition,
+            isPlaying,
+            soundObj,
+          });
+        }
     }
 
     return (
@@ -111,13 +148,7 @@ const AlbumList = () => {
                                 </Text>
                             </View>
                             <View style={AlbumStyle.innerUlti}>
-                                <TouchableOpacity>
-                                    <FontAwesome5 name="play" size={22} color="black" />
-                                </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <FontAwesome5 name="edit" size={22} color="black" />
-                                </TouchableOpacity>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={() => removePlaylist(item)}>
                                     <FontAwesome5 name="trash" size={22} color="black" />
                                 </TouchableOpacity>
                             </View>
@@ -132,7 +163,7 @@ const AlbumList = () => {
 
             <View style={AlbumStyle.innerAdd}>
                 <TouchableOpacity onPress={() => navigation.navigate('New Album')} style={AlbumStyle.add}>
-                    <FontAwesome5 name="plus" size={40} color="black" />
+                    <FontAwesome5 name="plus" size={40} color="white" />
                 </TouchableOpacity>
             </View>
             <PlayListDetail visible={showPlayList} playList={selectedPlayList} onClose={() => setShowPlayList(false)} />

@@ -10,7 +10,7 @@ export default StyleSheet.create({
     },
     timer:{
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         marginRight: 15,
     },
     innerMedia:{

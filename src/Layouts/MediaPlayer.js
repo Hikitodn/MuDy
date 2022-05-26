@@ -58,10 +58,9 @@ const MediaPlayer = () => {
       <View>
         <Text style={MediaStyle.title}>{currentAudio.id == undefined ? "Pick your Album to listen" : context.currentAudio.filename}</Text>
         <View style={MediaStyle.timer}>
-          <Text>
-            {currentAudio.id == undefined ? "00:00" : renderCurrentTime()}/
-          </Text>
-          <Text>{currentAudio.id == undefined ? "00:00" : convertTime(context.currentAudio.duration)}</Text>
+        
+          <Text>{context.isPlayListRunning && (<Text>From PlayList: {context.activePlayList.title}</Text>)} </Text>
+          <Text>{currentAudio.id == null ? "00:00" : renderCurrentTime()}/{currentAudio.id == undefined ? "00:00" : convertTime(context.currentAudio.duration)}</Text>
         </View>        
         <Slider 
           style={{width: width, height: 20,}}

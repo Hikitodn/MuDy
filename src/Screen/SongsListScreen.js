@@ -5,12 +5,16 @@ import {RecyclerListView, LayoutProvider} from 'recyclerlistview';
 import SongsListItem from '../Layouts/SongsListItem';
 import Screen from '../Misc/Screen';
 import { selectAudio } from '../Misc/audioController';
+import OptionModal from '../Misc/OptionModal'
 
 export class SongsListScreen extends Component {
   static contextType = AudioContext
 
   constructor(props) {
     super(props);
+    this.state = {
+      optionModalVisible: false,
+    };
     this.currentItem = {};
   }
 
@@ -36,9 +40,9 @@ export class SongsListScreen extends Component {
     this.context.loadPreviousAudio();
   }
 
-  navigateToPlaylist = item => {
+  navigateToPlaylist = () => {
     this.context.updateState(this.context, {
-      addToPlayList: item,
+      addToPlayList: this.currentItem,
     });
     this.props.navigation.navigate('Albums');
   };
@@ -51,7 +55,10 @@ export class SongsListScreen extends Component {
         activeListItem={this.context.currentAudioIndex === index}
         duration={item.duration}
         onAudioPress={() => this.handleAudioPress(item)}
-        onAddPlayList={() => this.navigateToPlaylist(item)}
+        onOptionPress={() => {
+          this.currentItem = item;
+          this.setState({ ...this.state, optionModalVisible: true });
+        }}
       />
     );
   };
@@ -68,6 +75,19 @@ export class SongsListScreen extends Component {
                 layoutProvider={this.layoutProvider}
                 rowRenderer={this.rowRenderer}
                 extendedState={{isPlaying}}
+              />
+              <OptionModal
+                options={[
+                  {
+                    title: 'Add to playlist',
+                    onPress: this.navigateToPlaylist,
+                  },
+                ]}
+                currentItem={this.currentItem}
+                onClose={() =>
+                  this.setState({ ...this.state, optionModalVisible: false })
+                }
+                visible={this.state.optionModalVisible}
               />
             </Screen>
           );

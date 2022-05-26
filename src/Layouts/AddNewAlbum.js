@@ -1,7 +1,6 @@
 import { Text, View, Button, Image, TextInput, TouchableOpacity, Alert } from 'react-native'
 import React, {useState, useContext} from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { FontAwesome5 } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -28,7 +27,6 @@ const AddNewAlbum = () => {
                 id: Date.now(),
                 title: playListName,
                 image: selectedImage.localUri,
-                des: desPlaylist,
                 audios: audios,
             }
             if (!playListName.trim()) {
@@ -69,37 +67,20 @@ const AddNewAlbum = () => {
     return (
         <View style={NewAlbumStyle.container}>
             <View style={NewAlbumStyle.AlbumView}>
-                <View style={NewAlbumStyle.innerAlbum}>
                     <View style={NewAlbumStyle.innerImage}>
                         <TouchableOpacity onPress={openImagePickerAsync} style={NewAlbumStyle.addImage}>
                             <Image style={{width: 75, height: 75}} source={require('../../assets/Images/add-image.png')} />
                         </TouchableOpacity>
                     </View>
-                    <View style={NewAlbumStyle.innerForm}>
-                        <Text>Title:</Text>
+            </View>
+
+                <View style={NewAlbumStyle.innerForm}>
                         <TextInput 
                             value={playListName} 
                             onChangeText={(text) => setplayListName(text)}
                             placeholder='Enter your title' 
-                            style={NewAlbumStyle.title} />
-                        <Text>Description:</Text>
-                        <TextInput
-                            value={desPlaylist} 
-                            onChangeText={(des) => setDesPlaylist(des)}
-                            placeholder='Enter your Description' 
-                            multiline 
-                            numberOfLines={4} 
-                            style={NewAlbumStyle.description}
-                        />
-                    </View>
+                            style={NewAlbumStyle.title} />                        
                 </View>
-            </View>
-
-            <View style={NewAlbumStyle.SongsView}>
-                <View style={NewAlbumStyle.innerSongs}>
-                    <Text></Text>
-                </View>
-            </View>
 
             <View style={NewAlbumStyle.ButtonView}>
                 <View style={NewAlbumStyle.ButtonStyle}>
@@ -115,37 +96,20 @@ const AddNewAlbum = () => {
         return(
             <View style={NewAlbumStyle.container}>
                 <View style={NewAlbumStyle.AlbumView}>
-                    <View style={NewAlbumStyle.innerAlbum}>
-                        <View style={NewAlbumStyle.innerImage}>
-                            <Image
-                                source={{ uri: selectedImage.localUri }}
-                                style={{width: 150, height: 150}}
-                            />
-                        </View>
-                        <View style={NewAlbumStyle.innerForm}>
-                            <Text>Title:</Text>
-                            <TextInput 
-                                value={playListName} 
-                                onChangeText={(text) => setplayListName(text)}
-                                placeholder='Enter your title' 
-                                style={NewAlbumStyle.title} />
-                            <Text>Description:</Text>
-                            <TextInput
-                                value={desPlaylist} 
-                                onChangeText={(des) => setDesPlaylist(des)}
-                                placeholder='Enter your Description' 
-                                multiline 
-                                numberOfLines={4} 
-                                style={NewAlbumStyle.description} 
-                            />
-                        </View>
+                    <View style={NewAlbumStyle.innerImage}>
+                    <Image
+                        source={{ uri: selectedImage.localUri }}
+                        style={{width: 200, height: 200}}
+                    />
                     </View>
                 </View>
 
-                <View style={NewAlbumStyle.SongsView}>
-                    <View style={NewAlbumStyle.innerSongs}>
-                        
-                    </View>
+                <View style={NewAlbumStyle.innerForm}>
+                    <TextInput 
+                        value={playListName} 
+                        onChangeText={(text) => setplayListName(text)}
+                        placeholder='Enter your title' 
+                        style={NewAlbumStyle.title} />                        
                 </View>
 
                 <View style={NewAlbumStyle.ButtonView}>

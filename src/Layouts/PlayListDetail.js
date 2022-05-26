@@ -31,7 +31,7 @@ const PlayListDetail = ({ visible, playList, onClose }) => {
           keyExtractor={item => item.id.toString()}
           renderItem={({ item }) => (
             <View style={{ marginBottom: 10 }}>
-              <SongsListItem title={item.filename} duration={item.duration} onAudioPress={()=> playAudio(item)} />
+              <SongsListItem visible={visible} title={item.filename} duration={item.duration} onAudioPress={()=> playAudio(item)} />
             </View>
           )}
         />

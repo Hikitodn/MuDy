@@ -2,6 +2,7 @@ import { View, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
+import { play, pause } from '../Misc/audioController';
 import VerticalSlider from 'rn-vertical-slider';
 
 import ASMRstyle from '../Styles/ASMRstyle'
@@ -13,14 +14,6 @@ const ASMRbutton = () => {
   
   const [volNumber, setVolNumber] = useState();
   const [sound, setSound] = useState();
-
-  useEffect(() => {
-    return sound
-      ? () => {
-          console.log('Unloading Sound');
-          sound.unloadAsync(); }
-      : undefined;
-  }, [sound]);
 
   return (
     <View style={ASMRstyle.containerButtonASMR}>

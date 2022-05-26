@@ -10,6 +10,7 @@ import AlbumScreen from './src/Screen/AlbumScreen';
 import AddNewAlbumScreen from './src/Screen/AddNewAlbumScreen';
 import AudioProvider from './src/context/AudioProvider';
 import SongsListScreen from './src/Screen/SongsListScreen';
+import PlayListDetail from './src/Screen/PlayListDetail';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -66,6 +67,11 @@ const App = () => {
         <RootStack.Screen 
           name = 'New Album' 
           component = {AddNewAlbumScreen}  
+        />
+
+        <RootStack.Screen 
+          name = 'PlayListDetail' 
+          component = {PlayListDetail}  
         />
           
         </RootStack.Navigator>

@@ -4,23 +4,16 @@ export default StyleSheet.create({
     container: {
         backgroundColor: '#fff',
         flex: 1,
+        justifyContent: 'center',
     },
     AlbumView: {
-        height: 170,
-        margin: 5,
-        alignItems: 'stretch',
+        alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 1,
-    },
-    innerAlbum: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'stretch',
     },
     innerImage: {
-        width: 150,
-        height: 150,
-        margin: 10,
+        width: 200,
+        height: 200,
+        marginVertical: 50,
         alignItems:'center',
         justifyContent: 'center',
         borderWidth: 1,
@@ -28,39 +21,20 @@ export default StyleSheet.create({
         borderStyle: 'dashed',
     },
     innerForm: {
-        flex: 1.5,
         margin: 10,
-        flexDirection: 'column',
     },
     title:{
+        textAlign: 'center',
         backgroundColor: '#fff',
         borderWidth: 1,
         borderColor: '#000',
         paddingLeft: 5,
     },
-    description:{
-        flex: 1,
-        backgroundColor: '#fff',
-        textAlignVertical: "top",
-        borderWidth: 1,
-        borderColor: '#000',
-        padding: 5,
-    },
-    SongsView: {
-        flex: 12,
-        margin: 5,
-        borderWidth: 1,
-    },
-    innerSongs: {
-        margin: 10,
-        flex: 1,
-    },
     ButtonView: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        alignSelf: 'flex-end',
+        alignSelf: 'center',
         margin: 5,
     },
     ButtonStyle: {
@@ -68,19 +42,4 @@ export default StyleSheet.create({
         width: 100,
         backgroundColor: '#fff'
     },
-    innerAdd: {
-        alignSelf: 'flex-end',
-        justifyContent: 'flex-end',
-        flex: 1,
-        position: 'absolute',
-        bottom: 0,
-    },
-    add:{
-        borderRadius: 50,
-        width: 40,
-        height: 40,
-        backgroundColor: '#2ff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
 });

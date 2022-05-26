@@ -43,7 +43,7 @@ const SongsListItem = ({
   onAudioPress,
   isPlaying,
   activeListItem,
-  onAddPlayList,
+  onOptionPress,
 }) => {
   return (
     <>
@@ -76,9 +76,12 @@ const SongsListItem = ({
             </View>
           </TouchableWithoutFeedback>
           <View style={styles.rightContainer}>
-            <TouchableOpacity onPress={onAddPlayList}>
-              <Octicons name="diff-added" size={30} color="black" />
-            </TouchableOpacity>
+            <Entypo
+              onPress={onOptionPress}
+              name='dots-three-vertical'
+              size={20}
+              color={color.FONT_MEDIUM}
+            />
           </View>
         </View>
       <View style={styles.separator} />
