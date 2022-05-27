@@ -39,6 +39,7 @@ export class AudioProvider extends Component {
       }])
     }
 
+    // get audio from device
     getAudioFiles = async () => {
       const {dataProvider, audioFiles} = this.state
       let media = await MediaLibrary.getAssetsAsync({
@@ -72,6 +73,7 @@ export class AudioProvider extends Component {
       this.setState({ ...this.state, currentAudio, currentAudioIndex });
     };
 
+    //require permission from user to access the device storage
     getPermission = async () => {
         // Object {
         //     "canAskAgain": true,

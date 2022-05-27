@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import MediaStyle from '../Styles/MediaStyle'
 import PlayerButton from '../Misc/PlayerButton';
 import { AudioContext } from '../context/AudioProvider';
-import { convertTime, storeAudioForNextOpening } from '../Misc/Storage';
+import { convertTime } from '../Misc/Storage';
 import Slider from '@react-native-community/slider';
 import {
   moveAudio,

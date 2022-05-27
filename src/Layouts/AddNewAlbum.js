@@ -12,13 +12,12 @@ const AddNewAlbum = () => {
     const {playList, addToPlayList, updateState} = context;
 
     const [playListName, setplayListName] = useState('')
-    const [desPlaylist, setDesPlaylist] = useState('')
     const [selectedImage, setSelectedImage] = useState(null);
     const navigation = useNavigation();
 
     const createNewAlbum = async () => {
         const result = await AsyncStorage.getItem('playlist');
-        if(result !== null || result === null){
+        if(result !== null){
             const audios = [];
             if(addToPlayList){
                 audios.push(addToPlayList)
@@ -97,10 +96,10 @@ const AddNewAlbum = () => {
             <View style={NewAlbumStyle.container}>
                 <View style={NewAlbumStyle.AlbumView}>
                     <View style={NewAlbumStyle.innerImage}>
-                    <Image
-                        source={{ uri: selectedImage.localUri }}
-                        style={{width: 200, height: 200}}
-                    />
+                        <Image
+                            source={{ uri: selectedImage.localUri }}
+                            style={{width: 200, height: 200}}
+                        />
                     </View>
                 </View>
 

@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AudioContext } from '../context/AudioProvider';
 import PlayListDetail from './PlayListDetail';
 
+let img = require('../../assets/Images/error.png')
 let selectedPlayList = {}
 const AlbumList = () => {
     
@@ -136,7 +137,7 @@ const AlbumList = () => {
                     >
                         <View style={AlbumStyle.inner}>
                             <View style={AlbumStyle.innerImage} >
-                                <Image style={AlbumStyle.image} source={{uri: item.image}} />
+                                <Image style={AlbumStyle.image} source={item.image == null ? img : {uri: item.image}} />
                             </View>
                             <View style={AlbumStyle.innerText}>
                                 <Text style={{flex: 1, fontSize: 16}}>{item.title}</Text>
@@ -153,6 +154,7 @@ const AlbumList = () => {
                                 </TouchableOpacity>
                             </View>
                         </View>
+                        {console.log(playList)}
                     </TouchableOpacity>
                 )) : 
                     <View style={{flex: 1, justifyContent:'center', alignItems: 'center'}}>

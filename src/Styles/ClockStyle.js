@@ -39,4 +39,56 @@ export default StyleSheet.create({
         marginTop: 10,
         borderRadius: 5,
     },
+    centerBell: {
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#00000099',
+    },
+    bellModal:{
+        width: 300,
+        height: 200,
+        backgroundColor: '#fff',
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#000',
+    },
+    bellBody: {
+        height: 150,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    bellButton: {
+        flexDirection: 'row',
+        height: 50,
+    },
+    bellInput:{
+        width: 50,
+        height: 50,
+        borderWidth: 1,
+        borderColor: '#555',
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        textAlign: 'center',
+        fontSize: 20,
+        margin: 10,
+    },
+    bellCancel:{
+        flex: 1,
+        borderWidth: 1,
+        borderColor: '#000',
+        borderBottomLeftRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    bellOk:{
+        flex: 1,
+        borderWidth: 1,
+        borderColor: '#000',
+        borderBottomRightRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        
+    }
 })
