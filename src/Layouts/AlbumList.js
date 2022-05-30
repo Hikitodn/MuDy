@@ -96,7 +96,6 @@ const AlbumList = () => {
         let playbackPosition = context.playbackPosition;
         let activePlayList = context.activePlayList;
     
-        console.log(selectedPlayList)
         if (context.isPlayListRunning && activePlayList.id === playList.id) {
           // stop
           await context.playbackObj.stopAsync();
@@ -154,7 +153,6 @@ const AlbumList = () => {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        {console.log(playList)}
                     </TouchableOpacity>
                 )) : 
                     <View style={{flex: 1, justifyContent:'center', alignItems: 'center'}}>
