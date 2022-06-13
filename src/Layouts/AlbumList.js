@@ -149,7 +149,7 @@ const AlbumList = () => {
                             </View>
                             <View style={AlbumStyle.innerUlti}>
                                 <TouchableOpacity onPress={() => removePlaylist(item)}>
-                                    <FontAwesome5 name="trash" size={22} color="black" />
+                                    <FontAwesome5 name="trash" size={30} color="black" />
                                 </TouchableOpacity>
                             </View>
                         </View>

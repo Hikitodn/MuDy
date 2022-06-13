@@ -16,7 +16,7 @@ const ASMRbutton = () => {
 
   const WindASMR = async () => {
     try{
-      const result = await wind.current.loadAsync(require('../../assets/ASMR/wind.wav'), {}, true);
+      const result = await wind.current.loadAsync(require('../../assets/ASMR/wind.wav'), {downloadFirst: true}, true);
       if (result.isLoaded === false) {
         console.log('Error in Loading Audio');
       }
@@ -38,7 +38,7 @@ const ASMRbutton = () => {
 
   const RainASMR = async () => {
     try{
-      const result = await rain.current.loadAsync(require('../../assets/ASMR/rain.wav'), {}, true);
+      const result = await rain.current.loadAsync(require('../../assets/ASMR/rain.wav'), {downloadFirst: true}, true);
       if (result.isLoaded === false) {
         console.log('Error in Loading Audio');
       }
@@ -60,7 +60,7 @@ const ASMRbutton = () => {
 
   const FireASMR = async () => {
     try{
-      const result = await fireplace.current.loadAsync(require('../../assets/ASMR/fireplace.wav'), {}, true);
+      const result = await fireplace.current.loadAsync(require('../../assets/ASMR/fireplace.wav'), {downloadFirst: true}, true);
       if (result.isLoaded === false) {
         console.log('Error in Loading Audio');
       }
